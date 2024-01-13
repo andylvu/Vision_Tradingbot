@@ -1,0 +1,3 @@
+- Obtain visual charting information via MT5
+- Timeframe = M15
+- 

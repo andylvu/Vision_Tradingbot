@@ -1,0 +1,78 @@
+from PIL import Image
+import pyautogui
+
+"""
+The general idea behind this image and datamining script is to capture a section of the screen
+on the trading view website. The criteria for this is to capture an area of 100 bars on the 1H
+time frame. After every image, we then use keyboard inputs to label the image. After this,
+100 bars are then passed allow us to see the after results, where more labeling can occur. 
+In addition to this, this new 'after' image is a new 'before' image for another training image.
+Each image will have three labels to it
+
+"""
+
+class DataMining:
+    
+
+    def __init__(self):
+
+
+        pass
+
+
+    # function to take screenshot of the screen in a specified area with specified dimension
+    # takes screenshots every hundred bars
+    @staticmethod
+    def screenshot():
+        x = 100
+        y = 200
+        width = 500
+        height = 500
+        screenshot = pyautogui.screenshot(region = (x, y, width, height))
+        screenshot.show()
+
+
+    def show_before(self):
+
+        pass
+
+
+    # after screen shot is taken, take user keyboard input to label image
+    # labels cover:
+        # trend: [up, down, none]
+        # phase: [push, pull, consolidation]      
+    def pre_labels(self):
+        trend_input = input("Enter 1 for 'up', 2 for 'downn', and 3 for 'no trend'")
+        trend_labels = {
+            '1': 'up', 
+            '2': 'down',
+            '3': 'no trend'
+            }
+        trend_label = trend_labels.get(trend_input)
+        phase_input = input("Enter 1 for 'push', 2 for 'pullback', 3 for 'consolidation'")
+        phase_labels = {
+            '1': 'push', 
+            '2': 'pullback',
+            '3': 'consolidation'
+            }
+        phase_label = phase_labels.get(phase_input)
+
+        
+    # for use to label what happens after
+    # label will cover after:
+    # [pulled back then pushed, reversed, continued to push, pushed then pulled back, consolidated]       
+    def after_label(self):
+        after = 1
+        pass
+
+
+    # function to move 100 bars to prepare for screenshots
+    def move100bars(self):
+
+        pass
+
+
+    # function to save image and corresponding labels to sqlite3 database
+    def insert(self):
+
+        pass

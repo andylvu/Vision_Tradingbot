@@ -1,0 +1,10 @@
+- Obtain visual charting information via MT5
+    - M15
+    - 8AM EST (15:00 MT5 time)
+    - GBPJPY
+
+
+- Criteria that the CNN needs to identify
+    - Up/Down trend
+        - What phase Push/Pull
+    - 

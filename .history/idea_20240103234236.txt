@@ -1,0 +1,12 @@
+- Obtain visual charting information via tradingview
+    - H1
+    - 100 bars
+    - 8AM EST (15:00 MT5 time)
+    - GBPJPY
+
+
+- For CNN
+    - two images
+        - 100 bars
+        - next 100 bars = what happens
+    - 
