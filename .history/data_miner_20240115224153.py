@@ -11,26 +11,25 @@ def main():
         data_miner = DataMining()
 #       data_miner.create_table() already created
     
-        for _ in range(3):
+        for _ in range(105):
 
               
-            whole_image = data_miner.screenshot()
-            current_image = data_miner.cut_image(whole_image)
-            whole_image.show()
-            data_miner.left_screen_click()
-            current_binary_image = data_miner.binary_image(current_image)
-            trend, phase, after = data_miner.label()
+            current_image = data_miner.screenshot()
+            current_image.show()
 
+            current_binary_image = data_miner.binary_image(current_image)
+            trend, phase = data_miner.label1()
+            os.system('taskkill /f /im PhotosApp.exe')
 
             data_miner.move100bars()
-
-
+            next_image = data_miner.screenshot()
+            next_image.show()
             data_miner.left_screen_click()
-
+            after = data_miner.label2()
 
 
             os.system('taskkill /f /im PhotosApp.exe')
-            time.sleep(.2)
+
             #data_miner.insert_label(current_binary_image, trend, phase, after)
             
 

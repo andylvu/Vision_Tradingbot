@@ -58,9 +58,9 @@ class DataMining:
     def cut_image(self, image):
 
         left = image.crop((0, 0, 1030, 721))
+        right = image.crop((1030, 0, 2061, 721))
 
-
-        return left
+        return left, right
 
 
     # takes the image obtained from the screenshot function and turns it into a BLOB for storage
@@ -76,7 +76,7 @@ class DataMining:
         # trend: [up, down, none]
         # phase: [push, pull, consolidation]  
         
-    def label(self):
+    def label1(self):
         trend_input = input("Enter 1 for 'up trend', 2 for 'downn trend', and 3 for 'no trend'")
         trend_labels = {
             '1': 'up', 

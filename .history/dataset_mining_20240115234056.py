@@ -57,10 +57,10 @@ class DataMining:
     
     def cut_image(self, image):
 
-        left = image.crop((0, 0, 1030, 721))
+        left = image.crop((52, 158, 620, 1030))
+        right = image.crop((1030, 158, 2112, 878))
 
-
-        return left
+        return left, right
 
 
     # takes the image obtained from the screenshot function and turns it into a BLOB for storage
@@ -76,7 +76,7 @@ class DataMining:
         # trend: [up, down, none]
         # phase: [push, pull, consolidation]  
         
-    def label(self):
+    def label1(self):
         trend_input = input("Enter 1 for 'up trend', 2 for 'downn trend', and 3 for 'no trend'")
         trend_labels = {
             '1': 'up', 
@@ -93,6 +93,17 @@ class DataMining:
             }
         phase_label = phase_labels.get(phase_input)
 
+        if trend_label is None or phase_label is None:
+            print('invalid input, enter valid option')
+            return self.label1()
+
+        return trend_label, phase_label
+    
+
+    # for use to label what happens after
+    # label will cover after:
+    # [pulled back then pushed, reversed, continued to push, pushed then pulled back, consolidated]       
+    def label2(self):
         after_input = input("""
                             Enter 1 for 'continues trend', 
                             2 for 'continues pull back', 
@@ -105,14 +116,11 @@ class DataMining:
             }
         after_label = after_labels.get(after_input)
 
-
-        if trend_label is None or phase_label is None:
+        if after_label is None:
             print('invalid input, enter valid option')
-            return self.label1()
+            return self.label2()
 
-        return trend_label, phase_label, after_label
-    
-
+        return after_label
 
 
     # function to move 100 bars to prepare for screenshots

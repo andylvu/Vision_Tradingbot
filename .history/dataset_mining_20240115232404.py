@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image
 import pyautogui
 import sqlite3
 import io
@@ -43,24 +43,13 @@ class DataMining:
 
     def screenshot(self):
         x = 52
-        y = 158
-        width = 2061
-        height = 721
+        y = 185
+        width = 1000
+        height = 720
         image = pyautogui.screenshot(region = (x, y, width, height))
-        draw = ImageDraw.Draw(image)
-        start_point = (1030, 0)
-        end_point = (1030, 721)
-        line_color = (255,0,0)
-        draw.line([start_point, end_point], fill = line_color, width = 2)
+        self.current_image = image
 
         return image
-    
-    def cut_image(self, image):
-
-        left = image.crop((0, 0, 1030, 721))
-
-
-        return left
 
 
     # takes the image obtained from the screenshot function and turns it into a BLOB for storage
@@ -76,7 +65,7 @@ class DataMining:
         # trend: [up, down, none]
         # phase: [push, pull, consolidation]  
         
-    def label(self):
+    def label1(self):
         trend_input = input("Enter 1 for 'up trend', 2 for 'downn trend', and 3 for 'no trend'")
         trend_labels = {
             '1': 'up', 
@@ -93,6 +82,17 @@ class DataMining:
             }
         phase_label = phase_labels.get(phase_input)
 
+        if trend_label is None or phase_label is None:
+            print('invalid input, enter valid option')
+            return self.label1()
+
+        return trend_label, phase_label
+    
+
+    # for use to label what happens after
+    # label will cover after:
+    # [pulled back then pushed, reversed, continued to push, pushed then pulled back, consolidated]       
+    def label2(self):
         after_input = input("""
                             Enter 1 for 'continues trend', 
                             2 for 'continues pull back', 
@@ -100,19 +100,16 @@ class DataMining:
                             """)
         after_labels = {
             '1': 'continues trend',
-            '2': 'continues pull back',
+            '2': 'continues pull back not breaking structure',
             '3': 'breaks structure and reverses'
             }
         after_label = after_labels.get(after_input)
 
-
-        if trend_label is None or phase_label is None:
+        if after_label is None:
             print('invalid input, enter valid option')
-            return self.label1()
+            return self.label2()
 
-        return trend_label, phase_label, after_label
-    
-
+        return after_label
 
 
     # function to move 100 bars to prepare for screenshots

@@ -15,8 +15,9 @@ def main():
 
               
             whole_image = data_miner.screenshot()
-            current_image = data_miner.cut_image(whole_image)
+            current_image, after_image = data_miner.cut_image(whole_image)
             whole_image.show()
+            time.sleep(.5)
             data_miner.left_screen_click()
             current_binary_image = data_miner.binary_image(current_image)
             trend, phase, after = data_miner.label()
@@ -30,7 +31,7 @@ def main():
 
 
             os.system('taskkill /f /im PhotosApp.exe')
-            time.sleep(.2)
+            time.sleep(.5)
             #data_miner.insert_label(current_binary_image, trend, phase, after)
             
 

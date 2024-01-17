@@ -58,9 +58,9 @@ class DataMining:
     def cut_image(self, image):
 
         left = image.crop((0, 0, 1030, 721))
+        right = image.crop((1030, 0, 2061, 721))
 
-
-        return left
+        return left, right
 
 
     # takes the image obtained from the screenshot function and turns it into a BLOB for storage

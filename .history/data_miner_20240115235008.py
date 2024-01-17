@@ -15,7 +15,7 @@ def main():
 
               
             whole_image = data_miner.screenshot()
-            current_image = data_miner.cut_image(whole_image)
+            current_image, after_image = data_miner.cut_image(whole_image)
             whole_image.show()
             data_miner.left_screen_click()
             current_binary_image = data_miner.binary_image(current_image)

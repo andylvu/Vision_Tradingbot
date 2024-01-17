@@ -1,8 +1,8 @@
-from PIL import Image, ImageDraw
+from PIL import Image
 import pyautogui
 import sqlite3
 import io
-import time
+
 
 """
 The general idea behind this image and datamining script is to capture a section of the screen
@@ -43,24 +43,13 @@ class DataMining:
 
     def screenshot(self):
         x = 52
-        y = 158
-        width = 2061
-        height = 721
+        y = 185
+        width = 1000
+        height = 720
         image = pyautogui.screenshot(region = (x, y, width, height))
-        draw = ImageDraw.Draw(image)
-        start_point = (1030, 0)
-        end_point = (1030, 721)
-        line_color = (255,0,0)
-        draw.line([start_point, end_point], fill = line_color, width = 2)
+        self.current_image = image
 
         return image
-    
-    def cut_image(self, image):
-
-        left = image.crop((0, 0, 1030, 721))
-
-
-        return left
 
 
     # takes the image obtained from the screenshot function and turns it into a BLOB for storage
@@ -76,15 +65,14 @@ class DataMining:
         # trend: [up, down, none]
         # phase: [push, pull, consolidation]  
         
-    def label(self):
-        trend_input = input("Enter 1 for 'up trend', 2 for 'downn trend', and 3 for 'no trend'")
+    def label1(self):
+        trend_input = input("Enter 1 for 'up', 2 for 'downn', and 3 for 'no trend'")
         trend_labels = {
             '1': 'up', 
             '2': 'down',
             '3': 'no trend'
             }
         trend_label = trend_labels.get(trend_input)
-
         phase_input = input("Enter 1 for 'push', 2 for 'pullback', 3 for 'consolidation'")
         phase_labels = {
             '1': 'push', 
@@ -93,26 +81,27 @@ class DataMining:
             }
         phase_label = phase_labels.get(phase_input)
 
+        return trend_label, phase_label
+    
+
+    # for use to label what happens after
+    # label will cover after:
+    # [pulled back then pushed, reversed, continued to push, pushed then pulled back, consolidated]       
+    def label2(self):
         after_input = input("""
-                            Enter 1 for 'continues trend', 
-                            2 for 'continues pull back', 
-                            3 for 'breaks structure and reverses'
+                            Enter 1 for 'pulled back then pushed', 2 for 'reversed', 3 for 'continued to push',
+                            4 for 'pushed then pulled back', 5 for 'consolidated'
                             """)
         after_labels = {
-            '1': 'continues trend',
-            '2': 'continues pull back',
-            '3': 'breaks structure and reverses'
+            '1': 'pulled back then pushed',
+            '2': 'reversed',
+            '3': 'continued to push',
+            '4': 'pushed then pulled back',
+            '5': 'consolidated'
             }
         after_label = after_labels.get(after_input)
 
-
-        if trend_label is None or phase_label is None:
-            print('invalid input, enter valid option')
-            return self.label1()
-
-        return trend_label, phase_label, after_label
-    
-
+        return after_label
 
 
     # function to move 100 bars to prepare for screenshots
@@ -120,12 +109,9 @@ class DataMining:
     def move100bars(self):
         pyautogui.moveTo(2150, 280)
         pyautogui.doubleClick()
-        pyautogui.moveTo(1100, 190)
-        pyautogui.dragTo(57, 190, 1, button = 'left')
+        pyautogui.moveTo(1100, 400)
+        pyautogui.dragTo(57, 400, 1, button = 'left')
  
-    def left_screen_click(self):
-        pyautogui.moveTo(-900, 630)
-        pyautogui.click(button = 'left')
 
 
     # function to save image and all labels to table
