@@ -11,7 +11,7 @@ def main():
         data_miner = DataMining()
 #       data_miner.create_table() already created
     
-        for _ in range(105):
+        for _ in range(3):
 
               
             whole_image = data_miner.screenshot()
