@@ -11,7 +11,7 @@ def main():
         data_miner = DataMining()
 #        data_miner.create_table() 
     
-        for _ in range(150):
+        for _ in range(3):
             # obtain the screenshot of the trading screen and area 
             whole_image = data_miner.screenshot()
             

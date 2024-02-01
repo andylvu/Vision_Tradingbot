@@ -128,23 +128,28 @@ class DataMining:
             return self.label()
         
         return trend_label, phase_label, after_label
+    
+
+
 
     # function to move 100 bars to prepare for screenshots
+
     def move100bars(self):
         pyautogui.moveTo(2150, 280)
         pyautogui.doubleClick()
         pyautogui.moveTo(1100, 190)
         pyautogui.dragTo(57, 190, 1, button = 'left')
-    
-    # click on left screen where the cmd terminal is
+ 
     def left_screen_click(self):
         pyautogui.moveTo(-900, 630)
         pyautogui.click(button = 'left')
 
+
     # function to save image and all labels to table
-    def insert_label(self, image, tradable, trend, phase, after):
-        insert_query = "INSERT INTO trading_data (image_data, tradable, trend, phase, after) VALUES (?, ?, ?, ?, ?)"
-        self.db_cursor.execute(insert_query, (image, tradable, trend, phase, after))
+    def insert_label(self, image, trend, phase, after):
+
+        insert_query = "INSERT INTO trading_data (image_data, tradable, trend, phase, after) VALUES (?, ?, ?, ?)"
+        self.db_cursor.execute(insert_query, (image, trend, phase, after))
         self.db_connection.commit()                       
 
 

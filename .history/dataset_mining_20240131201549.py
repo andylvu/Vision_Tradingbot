@@ -142,9 +142,9 @@ class DataMining:
         pyautogui.click(button = 'left')
 
     # function to save image and all labels to table
-    def insert_label(self, image, tradable, trend, phase, after):
-        insert_query = "INSERT INTO trading_data (image_data, tradable, trend, phase, after) VALUES (?, ?, ?, ?, ?)"
-        self.db_cursor.execute(insert_query, (image, tradable, trend, phase, after))
+    def insert_label(self, image, trend, phase, after):
+        insert_query = "INSERT INTO trading_data (image_data, tradable, trend, phase, after) VALUES (?, ?, ?, ?)"
+        self.db_cursor.execute(insert_query, (image, trend, phase, after))
         self.db_connection.commit()                       
 
 

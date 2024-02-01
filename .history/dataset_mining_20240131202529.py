@@ -83,7 +83,7 @@ class DataMining:
 
         if tradable_label is None:
             print('invalid input, enter valid option')
-            return self.tradable()
+            return self.tradable()f
 
         return tradable_label
     

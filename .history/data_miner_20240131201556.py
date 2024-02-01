@@ -11,7 +11,7 @@ def main():
         data_miner = DataMining()
 #        data_miner.create_table() 
     
-        for _ in range(150):
+        for _ in range(3):
             # obtain the screenshot of the trading screen and area 
             whole_image = data_miner.screenshot()
             
@@ -35,7 +35,7 @@ def main():
 
             # if trading conditions are not favorable
             if tradable == 'no':
-                trend, phase, after = 'null', 'null', 'null'
+                trend, phase, after = 'null'
                 data_miner.insert_label(current_binary_image, tradable, trend, phase, after)
 
             # if trading conditions are favorable
