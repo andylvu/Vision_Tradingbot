@@ -9,7 +9,7 @@ def main():
 
 
         data_miner = DataMining()
-#        data_miner.create_table() 
+        data_miner.create_table() 
     
         for _ in range(100):
             # obtain the screenshot of the trading screen and area 
