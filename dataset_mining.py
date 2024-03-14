@@ -16,13 +16,10 @@ Each image will have three labels to it
 
 class DataMining:
     
-
     def __init__(self, db_path = 'trading_data.db'):
         self.db_path = db_path
         self.db_connection = sqlite3.connect(db_path)
         self.db_cursor = self.db_connection.cursor()
-
-
 
 
     # creates the table for the database
@@ -87,6 +84,7 @@ class DataMining:
 
         return tradable_label
     
+
     # label tagging
     def label(self):
         # trend
@@ -129,6 +127,7 @@ class DataMining:
         
         return trend_label, phase_label, after_label
 
+
     # function to move 100 bars to prepare for screenshots
     def move100bars(self):
         pyautogui.moveTo(2150, 280)
@@ -136,10 +135,12 @@ class DataMining:
         pyautogui.moveTo(1100, 190)
         pyautogui.dragTo(57, 190, 1, button = 'left')
     
+
     # click on left screen where the cmd terminal is
     def left_screen_click(self):
         pyautogui.moveTo(-900, 630)
         pyautogui.click(button = 'left')
+
 
     # function to save image and all labels to table
     def insert_label(self, image, tradable, trend, phase, after):
